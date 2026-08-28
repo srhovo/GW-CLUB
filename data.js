@@ -64,7 +64,7 @@ window.APP_DATA = {
     },
     prepaid: {
       images: [
-        { name: '预存活动表', image: 'assets/services/prepaid.jpg' }
+        { name: '预存表', image: 'assets/services/prepaid.jpg' }
       ],
       items: [
         { name: '充 100',  amount: '到账 120',  bonus: '+20',  note: '新人尝鲜' },
@@ -80,7 +80,7 @@ window.APP_DATA = {
     },
     gift: {
       images: [
-        { name: '礼物价目表', image: 'assets/services/gift.jpg' }
+        { name: '常规礼物单', image: 'assets/services/gift.jpg' }
       ],
       items: [
         { name: '小心心',   price: '1r',   color: '#E98A8A', ch: '心' },
