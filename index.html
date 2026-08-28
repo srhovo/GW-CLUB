@@ -217,6 +217,11 @@
   /* 服务清单图片（价格表等长图/文档类图片）：完整显示不裁切，而不是套用陪玩卡的 5:3 裁切比例 */
   .modal-box.svc-view .modal-media{display:flex;align-items:center;justify-content:center;max-height:78vh}
   .modal-box.svc-view .modal-media img{width:auto;height:auto;max-width:100%;max-height:78vh;aspect-ratio:auto;object-fit:contain;object-position:center}
+  /* 双击放大状态：宽度撑满，长图可上下滑动 */
+  .modal-box.svc-view.zoomed .modal-media{display:block;max-height:82vh;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .modal-box.svc-view.zoomed .modal-media img{width:100%;height:auto;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:fill;display:block;border-radius:0}
+  .modal-box.svc-view.zoomed .modal-media::-webkit-scrollbar{width:4px}
+  .modal-box.svc-view.zoomed .modal-media::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3);border-radius:2px}
   .modal-mute{
     position:absolute;right:12px;bottom:12px;width:34px;height:34px;border-radius:50%;
     background:rgba(20,18,15,.5);border:none;color:#fff;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);
@@ -933,7 +938,7 @@ function openServiceImage(key, idx){
   $('#modalName').textContent = it.name || SERVICE_LABELS[key] || '';
   $('#modalMeta').textContent = SERVICE_LABELS[key] || '';
   $('#modalCondition').style.display = 'none';
-  $('#modalHint').textContent = '点击画面外区域关闭';
+  $('#modalHint').textContent = '点击画面外区域关闭 · 双击图片放大';
   modal.classList.add('open');
 }
 /* 选图图片查看：同上，但多显示一行「获取条件」自定义提示 */
@@ -958,15 +963,28 @@ function openGalleryImage(key, idx){
   }else{
     condEl.style.display = 'none';
   }
-  $('#modalHint').textContent = '点击画面外区域关闭';
+  $('#modalHint').textContent = '点击画面外区域关闭 · 双击图片放大';
   modal.classList.add('open');
 }
 function closeMedia(){
   modal.classList.remove('open');
+  $('.modal-box').classList.remove('zoomed');
   modalVideo.pause();
   modalVideo.removeAttribute('src');
   modalVideo.load();
 }
+/* 双击图片切换放大/还原（仅服务清单/选图图片生效） */
+modalImage.addEventListener('dblclick', function(){
+  const box = $('.modal-box');
+  if(!box.classList.contains('svc-view')) return;
+  box.classList.toggle('zoomed');
+  const hint = $('#modalHint');
+  if(box.classList.contains('zoomed')){
+    hint.textContent = '已放大 · 上下滑动查看 · 双击还原';
+  }else{
+    hint.textContent = '点击画面外区域关闭 · 双击图片放大';
+  }
+});
 function toggleMute(){
   modalVideo.muted = !modalVideo.muted;
   syncMuteIcon();

@@ -27,15 +27,15 @@ window.APP_DATA = {
   },
 
   /* 分路分类（可按需增删） */
-  lanes: ['打野', '中路', '射手', '辅助', '上单', '全能'],
+  lanes: ['打野', '中单', '射手', '边路', '辅助'],
 
   /* 价位筛选（可按需增删） */
-  prices: [15, 18, 20, 22, 25, 28, 30, 35, 40],
+  prices: [15, 20, 25, 30, 35],
 
   /* ================= 陪玩列表 =================
      字段：id / name / lane(单分路) 或 lanes(多分路数组) / price / tags / intro / image / video */
   companions: [
-    { id: 'yuji', name: '雨季', lanes: ['打野', '中路'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' }
+    { id: 'yuji', name: '雨季', lanes: ['打野', '中单'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' }
   ],
 
   /* ================= 服务清单 =================
