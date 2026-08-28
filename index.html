@@ -474,7 +474,14 @@ function renderClub(){
 const ASSET_BASES = {
   club: ['assets/club-logo','assets/club-title','assets/club']
 };
-(MANAGEMENT||[]).forEach(m => { if(m && m.role) ASSET_BASES['mg:'+m.role] = ['assets/management/'+m.role]; });
+const MG_PINYIN = {'团长':'tuanzhang','副团':'futuan','管理':'guanli'};
+(MANAGEMENT||[]).forEach(m => {
+  if(m && m.role){
+    const bases = ['assets/management/'+m.role];
+    if(MG_PINYIN[m.role]) bases.push('assets/management/'+MG_PINYIN[m.role]);
+    ASSET_BASES['mg:'+m.role] = bases;
+  }
+});
 function detectAssets(){
   const keys = Object.keys(ASSET_BASES);
   const tasks = keys.map(k => {

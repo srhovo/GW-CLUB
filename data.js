@@ -35,7 +35,7 @@ window.APP_DATA = {
   /* ================= 陪玩列表 =================
      字段：id / name / lane(单分路) 或 lanes(多分路数组) / price / tags / intro / image / video */
   companions: [
-    { id: 'yuji', name: '雨季', lanes: ['打野', '中路'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/雨季.jpeg', video: 'assets/voices/雨季.mp4' }
+    { id: 'yuji', name: '雨季', lanes: ['打野', '中路'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' }
   ],
 
   /* ================= 服务清单 =================
@@ -125,9 +125,9 @@ window.APP_DATA = {
      · 或在下面 avatar 字段直接手动填路径（会优先用职位命名自动检测到的图，其次才用这里填的路径）
      未提供头像时，页面用昵称首字显示占位圆形头像 */
   management: [
-    { role: '团长', name: '嘟嘟', v: 'keke-aoo', avatar: '' },
-    { role: '副团', name: '小翎', v: '_Elysia0304', avatar: '' },
-    { role: '管理', name: '小忆', v: 'YIk-xjw-fno4u', avatar: '' }
+    { role: '团长', name: '嘟嘟', v: 'keke-aoo', avatar: 'assets/management/tuanzhang.jpg' },
+    { role: '副团', name: '小翎', v: '_Elysia0304', avatar: 'assets/management/futuan.jpg' },
+    { role: '管理', name: '小忆', v: 'YIk-xjw-fno4u', avatar: 'assets/management/guanli.jpg' }
   ],
   managementNote: '☁️有任何问题都可以向管理层询问，我们会竭力保证宝宝们的游戏体验',
 
