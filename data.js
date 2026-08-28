@@ -93,8 +93,9 @@ window.APP_DATA = {
       ]
     },
     settlement: {
-      /* 结算规则：新增的一栏，用法同上，先留空，等你上传图片后加一行即可 */
-      images: []
+      images: [
+        { name: '结算规则', image: 'assets/services/settlement.jpg' }
+      ]
     }
   },
 
