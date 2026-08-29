@@ -493,7 +493,11 @@ function detectAssets(){
     const cands = [];
     (ASSET_BASES[k]||[]).forEach(b => ['png','jpg','jpeg','webp'].forEach(ext => cands.push(b+'.'+ext)));
     return Promise.all(cands.map(p =>
-      fetch(p, {method:'HEAD'}).then(r => r.ok ? p : null).catch(() => null)
+      fetch(p, {method:'HEAD'}).then(r => {
+        if(!r.ok) return null;
+        const ct = r.headers.get('content-type') || '';
+        return (ct.startsWith('image/') || ct.startsWith('video/')) ? p : null;
+      }).catch(() => null)
     )).then(results => {
       const hit = results.find(Boolean);
       if(hit) RESOLVED[k] = hit;
