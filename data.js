@@ -17,7 +17,7 @@
 window.APP_DATA = {
 
   /* 更新日期（页面会展示） */
-  updateDate: '2026-08-27',
+  updateDate: '2026-08-29',
 
   /* 俱乐部标题图（图片形式展示）
      直接把图片命名为 assets/club-logo.png 上传即可自动生效（也支持 club-title.png / club.png，
@@ -35,7 +35,9 @@ window.APP_DATA = {
   /* ================= 陪玩列表 =================
      字段：id / name / lane(单分路) 或 lanes(多分路数组) / price / tags / intro / image / video */
   companions: [
-    { id: 'yuji', name: '雨季', lanes: ['打野', '中单'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' }
+    { id: 'yuji', name: '雨季', lanes: ['打野', '中单'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' },
+    { id: 'xiaobei', name: '小北', lanes: ['中单', '打野'], price: 35, tags: ['火舞', '猫咪', '弈星'], intro: '一个宝宝 · 主玩英雄：火舞', image: 'assets/cards/小北.jpg', video: 'assets/voices/小北.mp4' },
+    { id: 'yeyu', name: '夜羽', lanes: ['中单', '辅助'], price: 35, tags: ['杨玉环', '嫦娥', '海月', '西施', '大乔'], intro: '温柔话多抽象有梗 · 主玩英雄：杨玉环', image: 'assets/cards/夜羽.jpg', video: '' }
   ],
 
   /* ================= 服务清单 =================
