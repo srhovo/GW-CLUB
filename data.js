@@ -17,7 +17,7 @@
 window.APP_DATA = {
 
   /* 更新日期（页面会展示） */
-  updateDate: '2026-08-29',
+  updateDate: '2026-08-30',
 
   /* 俱乐部标题图（图片形式展示）
      直接把图片命名为 assets/club-logo.png 上传即可自动生效（也支持 club-title.png / club.png，
@@ -37,7 +37,55 @@ window.APP_DATA = {
   companions: [
     { id: 'yuji', name: '雨季', lanes: ['打野', '中单'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' },
     { id: 'xiaobei', name: '小北', lanes: ['中单', '打野'], price: 35, tags: ['火舞', '猫咪', '弈星'], intro: '一个宝宝 · 主玩英雄：火舞', image: 'assets/cards/小北.jpg', video: 'assets/voices/小北.mp4' },
-    { id: 'yeyu', name: '夜羽', lanes: ['中单', '辅助'], price: 35, tags: ['杨玉环', '嫦娥', '海月', '西施', '大乔'], intro: '温柔话多抽象有梗 · 主玩英雄：杨玉环', image: 'assets/cards/夜羽.jpg', video: '' }
+    { id: 'yeyu', name: '夜羽', lanes: ['中单', '辅助'], price: 35, tags: ['杨玉环', '嫦娥', '海月', '西施', '大乔'], intro: '温柔话多抽象有梗 · 主玩英雄：杨玉环', image: 'assets/cards/夜羽.jpg', video: '' },
+    { id: 'angel', name: 'Angel', lanes: ['中单'], price: 15, tags: ['少司缘瑶西施小乔'], intro: '我保证你是天使是这世界太坏', image: '', video: 'assets/voices/Angel.mp4' },
+    { id: 'dk', name: 'DK', lanes: ['射手'], price: 30, tags: ['元射龙人阿离'], intro: '希望我们天天开心', image: '', video: 'assets/voices/DK.mp4' },
+    { id: 'emo', name: 'emo', lanes: ['打野'], price: 25, tags: ['橘右京影'], intro: '天天开心', image: '', video: 'assets/voices/emo.mp4' },
+    { id: 'fox', name: 'fox', lanes: ['打野'], price: 20, tags: ['曜公孙离'], intro: '心态稳脾气好想做姐姐的小宝', image: '', video: 'assets/voices/fox.mp4' },
+    { id: 'jiayi', name: '佳一', lanes: ['中单'], price: 30, tags: ['常娥沈梦溪女娲小乔甄姬奔星'], intro: '所愿必至所愿必成', image: '', video: 'assets/voices/佳一.mp4' },
+    { id: 'jiaqi', name: '佳琪', lanes: ['辅助'], price: 15, tags: ['小乔 朵莉亚 孙尚香'], intro: '我们相依默据结心言距为零', image: '', video: 'assets/voices/佳琪.mp4' },
+    { id: 'doudou', name: '兜兜', lanes: ['射手'], price: 15, tags: ['虞姬狄仁杰元射阿古朵'], intro: '念旧的人终究被困在回忆里', image: '', video: 'assets/voices/兜兜.mp4' },
+    { id: 'chubai', name: '初白', lanes: ['打野'], price: 35, tags: ['公孙离元射孙权'], intro: '124段射精通全部射手', image: '', video: 'assets/voices/初白.mp4' },
+    { id: 'qianxun', name: '千寻', lanes: ['中单'], price: 35, tags: ['元射阿离火舞嫁娥'], intro: '等我刷把破晓带你同登彼岸', image: '', video: 'assets/voices/千寻.mp4' },
+    { id: 'junwang', name: '君忘', lanes: ['打野'], price: 30, tags: ['裴擒虎橘子赵云宫本'], intro: '聪明的打野', image: '', video: 'assets/voices/君忘.mp4' },
+    { id: 'tangsan', name: '唐三', lanes: ['边路'], price: 30, tags: ['夏洛特'], intro: '头很大头很大', image: '', video: 'assets/voices/唐三.mp4' },
+    { id: 'mosheng', name: '墨笙', lanes: ['打野'], price: 20, tags: ['露娜云婆公孙离艾琳孙权'], intro: '水墨丹青画尽世间笙策', image: '', video: 'assets/voices/墨笙.mp4' },
+    { id: 'ningque', name: '宁缺', lanes: ['边路'], price: 30, tags: ['影曹操亚连狂铁虽婷夏洛特'], intro: '宁缺舟滥', image: '', video: 'assets/voices/宁缺.mp4' },
+    { id: 'shousi', name: '寿司', lanes: ['射手'], price: 25, tags: ['阿离元射龙人戈雅董孙权'], intro: '心无所依怎么不算流浪', image: '', video: 'assets/voices/寿司.mp4' },
+    { id: 'xiao1', name: '小1', lanes: ['射手'], price: 15, tags: ['鲁班甄姬'], intro: '好事会发生', image: '', video: 'assets/voices/小1.mp4' },
+    { id: 'xiao7', name: '小7', lanes: ['边路'], price: 25, tags: ['蛋影小满元歌曹操亚连'], intro: '战坦双修边路独有的浪漫', image: '', video: 'assets/voices/小7.mp4' },
+    { id: 'xiaou', name: '小u', lanes: ['中单'], price: 30, tags: ['婉儿'], intro: '神秘尿分叉女子', image: '', video: 'assets/voices/小u.mp4' },
+    { id: 'xiaojue', name: '小决', lanes: ['打野'], price: 15, tags: ['兰陵王元刺阿古朵大禹'], intro: '等你多久我都愿意', image: '', video: 'assets/voices/小决.mp4' },
+    { id: 'xiaoyou', name: '小忧', lanes: ['打野'], price: 30, tags: ['马超靠老虎'], intro: '温柔话多脾气好', image: '', video: 'assets/voices/小忧.mp4' },
+    { id: 'xiaonian', name: '小念', lanes: ['中单'], price: 15, tags: ['少司缘西施小乔'], intro: '比今天更萌的只有明天的我OvC', image: '', video: 'assets/voices/小念.mp4' },
+    { id: 'xiaoshu', name: '小暑', lanes: ['打野'], price: 25, tags: ['橘子玄策奕星'], intro: '我的存在对你产生意义了吗', image: '', video: 'assets/voices/小暑.mp4' },
+    { id: 'xiaoyue', name: '小月', lanes: ['中单'], price: 35, tags: ['沈梦溪海月火舞女蜗公孙离'], intro: '中射英雄海会工具中抗压射', image: '', video: 'assets/voices/小月.mp4' },
+    { id: 'xiaonan', name: '小楠', lanes: ['射手'], price: 30, tags: ['公孙马龙人蛋蚝元射虞姬'], intro: '温柔的射手万花筒', image: '', video: 'assets/voices/小楠.mp4' },
+    { id: 'xiaowen', name: '小温', lanes: ['打野'], price: 30, tags: ['马超老虎镜'], intro: '天天开心', image: '', video: 'assets/voices/小温.mp4' },
+    { id: 'xiaohao', name: '小皓', lanes: ['射手'], price: 30, tags: ['元射阿离守约孙权熬险'], intro: '发育路的一个嘉豪', image: '', video: 'assets/voices/小皓.mp4' },
+    { id: 'xiaohui', name: '小辉', lanes: ['射手'], price: 35, tags: ['公孙离敷隐马可元射'], intro: '我有我不能输的理由', image: '', video: 'assets/voices/小辉.mp4' },
+    { id: 'xiaoci', name: '小辞', lanes: ['打野'], price: 35, tags: ['韩信露露老虎露娜'], intro: '失误就不配赢', image: '', video: 'assets/voices/小辞.mp4' },
+    { id: 'xiaochen', name: '小辰', lanes: ['打野'], price: 25, tags: ['老虎诸葛罪橘子'], intro: '野核蓝领全能', image: '', video: 'assets/voices/小辰.mp4' },
+    { id: 'xiaoyi', name: '小逸', lanes: ['中单'], price: 30, tags: ['沈梦溪嫁娥甄姬少司缘'], intro: '知足更接近幸福', image: '', video: 'assets/voices/小逸.mp4' },
+    { id: 'xiaoxue', name: '小雪', lanes: ['打野'], price: 35, tags: ['老虎靠马超橘子'], intro: '做好自己', image: '', video: 'assets/voices/小雪.mp4' },
+    { id: 'xiaoyu', name: '小鱼', lanes: ['中单'], price: 15, tags: ['小乔元法少司缘'], intro: '想做块披萨和你心连心', image: '', video: 'assets/voices/小鱼.mp4' },
+    { id: 'dina', name: '帝纳', lanes: ['辅助'], price: 15, tags: ['瑶少司缘艾琳西施'], intro: '用心守护最好的宝宝', image: '', video: 'assets/voices/帝纳.mp4' },
+    { id: 'qieyi', name: '惬沂', lanes: ['打野'], price: 30, tags: ['老虎靠宫本'], intro: '无事伴心弦所念皆如愿', image: '', video: 'assets/voices/惬沂.mp4' },
+    { id: 'zaoshui', name: '早睡', lanes: ['射手'], price: 30, tags: ['阿离龙人元射戈雅香香'], intro: '游射万花筒温柔话多冷静兜底', image: '', video: 'assets/voices/早睡.mp4' },
+    { id: 'xingfu', name: '星福', lanes: ['打野'], price: 30, tags: ['常娥影靠猫咪诸葛等'], intro: '嘎嘎话多单口战神有情绪价值', image: '', video: 'assets/voices/星福.mp4' },
+    { id: 'zhaozhao', name: '昭昭', lanes: ['打野'], price: 35, tags: ['老虎罪韩信大司命云樱元射'], intro: '总有人觉得你的开心比对错更重要', image: '', video: 'assets/voices/昭昭.mp4' },
+    { id: 'qiyi', name: '柒忆', lanes: ['边路'], price: 30, tags: ['夏洛特狂铁马超吃'], intro: '无敌自爆边', image: '', video: 'assets/voices/柒忆.mp4' },
+    { id: 'hanbao', name: '汉堡', lanes: ['射手'], price: 30, tags: ['元射老虎李白'], intro: '很高兴遇见你十四亿分之一', image: '', video: 'assets/voices/汉堡.mp4' },
+    { id: 'jiangchen', name: '江辰', lanes: ['打野'], price: 35, tags: ['镜老虎阿离戈娅'], intro: '绝对野区入侵射手抗压之神', image: '', video: 'assets/voices/江辰.mp4' },
+    { id: 'jiangye', name: '江野', lanes: ['打野'], price: 30, tags: ['马超夏洛特元歌影白起'], intro: '如果是你的话晚一点也没关系', image: '', video: 'assets/voices/江野.mp4' },
+    { id: 'tiancai', name: '甜菜', lanes: ['中单'], price: 15, tags: ['大乔小乔王昭君阿离'], intro: '极品少女音单口大王', image: '', video: 'assets/voices/甜菜.mp4' },
+    { id: 'suisui', name: '碎碎', lanes: ['打野'], price: 25, tags: ['影马超靠'], intro: '温柔话多想陪你', image: '', video: 'assets/voices/碎碎.mp4' },
+    { id: 'qiuqiu', name: '秋秋', lanes: ['边路'], price: 30, tags: ['狂铁马超曹操蛋吨关羽'], intro: '战坦双修', image: '', video: 'assets/voices/秋秋.mp4' },
+    { id: 'luoyue', name: '落月', lanes: ['中单'], price: 35, tags: ['女蜗猫咪火舞西施'], intro: '纲默风趣会照顾姐姐游戏体验', image: '', video: 'assets/voices/落月.mp4' },
+    { id: 'yu', name: '语', lanes: ['打野'], price: 35, tags: ['老虎阿古朵马超靠'], intro: '2.1W老虎阿古朵嫁娥猫咪', image: '', video: 'assets/voices/语.mp4' },
+    { id: 'ruantang', name: '软糖', lanes: ['中单'], price: 15, tags: ['公孙离狄仁杰小乔瑶'], intro: '阴雨绵绵你是我的晴天', image: '', video: 'assets/voices/软糖.mp4' },
+    { id: 'shuangjin', name: '霜烬', lanes: ['中单'], price: 20, tags: ['沈梦溪娥奕星'], intro: '同途即心安', image: '', video: 'assets/voices/霜烬.mp4' },
+    { id: 'gege', name: '鸽鸽', lanes: ['中单'], price: 15, tags: ['阿离香香'], intro: '话多抽象只想做你的开心果', image: '', video: 'assets/voices/鸽鸽.mp4' }
   ],
 
   /* ================= 服务清单 =================
