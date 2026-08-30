@@ -1,6 +1,8 @@
 # 📖 养成系club 网站更新指南（小白版）
 
 > 本指南教你如何用 AI 助手（如豆包、ChatGPT 等）更新网站内容，全程不需要懂代码。
+> 
+> ⚠️ **最重要的一条规则**：所有上传的图片和视频文件名**必须使用英文或拼音**，绝对禁止中文文件名！否则 Cloudflare Pages 会返回 400 错误，图片/视频完全无法加载。详细规范见 `AGENT_GUIDE.md`。
 
 ---
 
@@ -25,21 +27,21 @@
 
 把图片放到**正确的文件夹**，AI 才能帮你配好：
 
-| 内容类型 | 放哪个文件夹 | 图片命名建议 |
-|---------|------------|------------|
-| 陪玩自介卡 | `assets/cards/` | 陪玩名字.jpeg，如 `小羽.jpeg` |
-| 陪玩音介视频 | `assets/voices/` | 陪玩名字.mp4，如 `小羽.mp4` |
+| 内容类型 | 放哪个文件夹 | 图片命名规则（必须英文/拼音） |
+|---------|------------|--------------------------|
+| 陪玩自介卡 | `assets/cards/` | 陪玩英文id.jpg，如 `xiaoyu.jpg` |
+| 陪玩音介视频 | `assets/voices/` | 陪玩英文id.mp4，如 `xiaoyu.mp4` |
 | 价格表 | `assets/services/` | `price.jpg` |
 | 预存活动表 | `assets/services/` | `prepaid.jpg` |
 | 礼物价目表 | `assets/services/` | `gift.jpg` |
 | 结算规则 | `assets/services/` | `settlement.jpg` |
 | 活动宣传图 | `assets/services/` | `activity.jpg` |
-| 管理层头像 | `assets/management/` | 按职位命名：`团长.jpg`、`副团.jpg`、`管理.jpg` |
+| 管理层头像 | `assets/management/` | 职位拼音：`tuanzhang.jpg`、`futuan.jpg`、`guanli.jpg` |
 | 俱乐部标题图 | `assets/` 根目录 | `club-logo.jpg`（也支持 png/webp） |
-| 选图-板卡 | `assets/gallery/` | 随意命名，如 `板卡01.jpg` |
-| 选图-冠卡 | `assets/gallery/` | 随意命名，如 `冠卡01.jpg` |
+| 选图-板卡 | `assets/gallery/` | 英文命名，如 `board_01.jpg` |
+| 选图-冠卡 | `assets/gallery/` | 英文命名，如 `champion_01.jpg` |
 
-> ⚠️ **管理层头像是自动生效的**：只要把图片命名为 `团长.jpg`、`副团.jpg`、`管理.jpg` 放到 `assets/management/` 文件夹，不需要改 data.js，刷新页面就会显示。
+> ⚠️ **管理层头像是自动生效的**：只要把图片命名为 `tuanzhang.jpg`（团长）、`futuan.jpg`（副团）、`guanli.jpg`（管理）放到 `assets/management/` 文件夹，不需要改 data.js，刷新页面就会显示。
 
 ---
 
@@ -59,12 +61,12 @@
 ```
 请帮我修改这个项目里的 data.js 文件，在 companions 数组里新增一个陪玩：
 - 名字：【陪玩名字】
-- 分路：【打野/中路/射手/辅助/上单/全能，可写多个】
+- 分路：【打野/中单/射手/边路/辅助，可写多个】
 - 价格：【数字，如 25】
 - 标签：【如 温柔,声甜,带飞】
 - 简介：【一句话介绍】
-- 自介卡图片路径：assets/cards/【文件名】.jpeg
-- 音介视频路径：assets/voices/【文件名】.mp4（没有就留空）
+- 自介卡图片路径：assets/cards/【英文id】.jpg（文件名必须是英文，如 xiaoyu.jpg）
+- 音介视频路径：assets/voices/【英文id】.mp4（文件名必须是英文，没有就留空）
 
 改完后告诉我改了什么。
 ```
@@ -144,6 +146,9 @@
 | 礼物单 | `gallery.gift.images` |
 | 开黑卡 | `gallery.squad.images` |
 | 成长录 | `gallery.growth.images` |
+| 守护星 | `gallery.guardian.images` |
+| 领养卡 | `gallery.adopt.images` |
+| 生日卡 | `gallery.birthday.images` |
 | 结单小票 | `gallery.receipt.images` |
 
 ---
@@ -151,7 +156,7 @@
 ## 👔 场景四：更新管理层信息
 
 ### 改头像
-直接把新图片命名为 `团长.jpg` / `副团.jpg` / `管理.jpg`，覆盖上传到 `assets/management/` 即可，**不用改代码**。
+直接把新图片命名为 `tuanzhang.jpg`（团长）/ `futuan.jpg`（副团）/ `guanli.jpg`（管理），覆盖上传到 `assets/management/` 即可，**不用改代码**。
 
 ### 改名字/微信号
 ```
@@ -182,13 +187,15 @@
 A：检查是否推送到了 GitHub；如果已推送，试试强制刷新页面（Ctrl+Shift+R 或 清缓存）。
 
 **Q：图片上传了但显示不出来？**
-A：99% 是 data.js 里的图片路径写错了。检查文件名大小写、后缀名（.jpg 和 .jpeg 不一样）、文件夹路径是否正确。
+A：最常见的两个原因：
+1. **文件名是中文**：Cloudflare Pages 对中文文件名返回 400 错误，必须重命名为英文/拼音。
+2. **路径写错了**：检查 data.js 里的路径与实际文件名大小写、后缀名是否完全一致。
 
 **Q：可以一次让 AI 改多个东西吗？**
 A：可以！把多个需求一起说清楚就行，比如"帮我新增一个陪叫小羽，同时把价格表换成新的 price_v2.jpg，再把更新日期改成今天"。
 
-**Q：音介视频太大上传不了？**
-A：GitHub 单文件建议不超过 50MB，视频可以用压缩工具转成小尺寸 mp4（长边 1000px 左右足够）。
+**Q：音介视频太大加载慢？**
+A：单个视频建议压缩到 15MB 以内（理想 5-10MB），用 HandBrake 或格式工厂转成 H.264 编码的 mp4，长边 1000px 左右，码率 1-2Mbps。超过 50MB 会导致 Cloudflare Pages 部署失败。
 
 ---
 
@@ -205,3 +212,5 @@ A：GitHub 单文件建议不超过 50MB，视频可以用压缩工具转成小�
 ```
 
 > 💡 **提示**：把 data.js 文件内容直接发给 AI，或者让 AI 读取项目里的 data.js，它就能精准修改。
+> 
+> 🤖 **AI 操作规范**：项目根目录下的 `AGENT_GUIDE.md` 是给 AI 助手看的强制操作规范，包含文件命名、压缩标准、部署检查清单等。让 AI 操作时提醒它先阅读该文件。
