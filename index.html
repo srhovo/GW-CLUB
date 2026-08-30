@@ -135,6 +135,10 @@
   .seg-scrollable{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .seg-scrollable::-webkit-scrollbar{display:none}
   .seg-scrollable .seg-item{flex:0 0 auto;min-width:72px;padding:9px 12px}
+  /* 滑动暗示：边缘渐隐遮罩（配合 JS 按滚动位置切换） */
+  .seg-scrollable.fade-r{mask-image:linear-gradient(to right,#000 0,#000 calc(100% - 26px),transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 0,#000 calc(100% - 26px),transparent 100%)}
+  .seg-scrollable.fade-l{mask-image:linear-gradient(to right,transparent 0,#000 26px,#000 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 26px,#000 100%)}
+  .seg-scrollable.fade-l.fade-r{mask-image:linear-gradient(to right,transparent 0,#000 26px,#000 calc(100% - 26px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,#000 26px,#000 calc(100% - 26px),transparent 100%)}
 
   .panel-head{display:flex;align-items:center;justify-content:space-between;margin:16px 22px 2px}
   .panel-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
@@ -410,7 +414,7 @@
 /* ============================================================
    数据入口
    ============================================================ */
-const DATA = window.APP_DATA || { lanes:[], prices:[], companions:[], services:{price:{images:[],items:[]},prepaid:{images:[],items:[]},gift:{images:[],items:[]},activity:{images:[]},settlement:{images:[]}}, gallery:{board:{images:[]},champion:{images:[]},gift:{images:[]},squad:{images:[]},growth:{images:[]},receipt:{images:[]}}, management:[], notes:{title:'',items:[]} };
+const DATA = window.APP_DATA || { lanes:[], prices:[], companions:[], services:{price:{images:[],items:[]},prepaid:{images:[],items:[]},gift:{images:[],items:[]},activity:{images:[]},settlement:{images:[]}}, gallery:{board:{images:[]},champion:{images:[]},gift:{images:[]},squad:{images:[]},growth:{images:[]},guardian:{images:[]},adopt:{images:[]},birthday:{images:[]},vip:{images:[]},receipt:{images:[]}}, management:[], notes:{title:'',items:[]} };
 const LANES  = DATA.lanes && DATA.lanes.length ? ['全部'].concat(DATA.lanes) : ['全部','打野','中路','射手','辅助','上单','全能'];
 const PRICES = ['全部'].concat((DATA.prices && DATA.prices.length ? DATA.prices : [15,18,20,22,25,28,30,35,40]).map(String));
 const COMPANIONS = DATA.companions || [];
@@ -619,7 +623,7 @@ function subContent(key){
 }
 
 /* ============================================================
-   渲染：选图（板卡/冠卡/礼物单/开黑卡/成长录/结单小票）
+   渲染：选图（板卡/冠卡/礼物单/开黑卡/成长录/守护星/领养卡/生日卡/VIP卡/结单小票）
    与服务清单共用同一套卡片墙样式；区别是点开大图后下方会显示「获取条件」
    ============================================================ */
 const GALLERY_TABS = [
@@ -631,6 +635,7 @@ const GALLERY_TABS = [
   {key:'guardian', label:'守护星'},
   {key:'adopt', label:'领养卡'},
   {key:'birthday', label:'生日卡'},
+  {key:'vip', label:'VIP卡'},
   {key:'receipt', label:'结单小票'}
 ];
 const GALLERY_LABELS = {};
@@ -642,8 +647,33 @@ function renderGallery(){
     `<button class="seg-item ${state.gal===t.key?'active':''}" onclick="setGalSub('${t.key}')">${t.label}</button>`
   ).join('');
   $('#galleryContent').innerHTML = galContent(state.gal);
+  updateGalFade();
 }
 function setGalSub(k){ state.gal = k; renderGallery(); }
+
+/* ===== 选图分类栏滑动暗示 =====
+   1) 边缘渐隐：横向有溢出时右缘淡出、滑到底后左缘淡出，暗示还有更多分类
+   2) 首次进入选图页时，分类栏自动轻滑一下再弹回（每台设备只提示一次，localStorage 记录） */
+function updateGalFade(){
+  const seg = $('#gallerySeg'); if(!seg) return;
+  const overflow = seg.scrollWidth - seg.clientWidth > 1;
+  const atLeft  = seg.scrollLeft <= 1;
+  const atRight = seg.scrollLeft + seg.clientWidth >= seg.scrollWidth - 1;
+  seg.classList.toggle('fade-r', overflow && !atRight);
+  seg.classList.toggle('fade-l', overflow && !atLeft);
+}
+function nudgeGalSeg(){
+  const seg = $('#gallerySeg'); if(!seg) return;
+  if(localStorage.getItem('galSegNudged')) return;               // 只提示一次
+  if(seg.scrollWidth - seg.clientWidth <= 1) return;             // 没溢出就不需要提示
+  if(seg.scrollLeft > 0) return;                                 // 用户已经在滑了，不打扰
+  localStorage.setItem('galSegNudged','1');
+  const dist = Math.min(96, seg.scrollWidth - seg.clientWidth);
+  seg.scrollTo({left:dist, behavior:'smooth'});
+  setTimeout(()=> seg.scrollTo({left:0, behavior:'smooth'}), 520);
+}
+$('#gallerySeg').addEventListener('scroll', updateGalFade, {passive:true});
+window.addEventListener('resize', updateGalFade);
 function galContent(key){
   const label = GALLERY_LABELS[key] || '';
   const list = galImages(key);
@@ -893,6 +923,10 @@ function route(){
   if(h==='search'){
     const inp = $('#searchInput');
     if(inp) setTimeout(()=>inp.focus(),60);
+  }
+  if(h==='gallery'){        // 视图刚显示，刷新渐隐状态并做首次滑动提示
+    updateGalFade();
+    nudgeGalSeg();
   }
 }
 window.addEventListener('hashchange', route);

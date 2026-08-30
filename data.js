@@ -8,7 +8,7 @@
    4. 管理层头像 → assets/management/（按职位命名，见下方 management 注释）
    5. 服务清单图片（价格表/预存表/结算规则/礼物单/活动图）→ assets/services/
       每栏可放多张图，每张图都有自己的自定义名字，见下方 services 注释
-   6. 选图（板卡/冠卡/礼物单/开黑卡/成长录/结单小票）→ assets/gallery/
+   6. 选图（板卡/冠卡/礼物单/开黑卡/成长录/守护星/领养卡/生日卡/VIP卡/结单小票）→ assets/gallery/
       每张图除了名字，还能填一句「获取条件」，见下方 gallery 注释
    ⚠️ 图片建议先压缩到合理尺寸再上传（长边 1000~1600px 足够清晰），
       原图直出（几千像素、好几 MB）会让页面加载变慢，比例不受限制。
@@ -158,7 +158,7 @@ window.APP_DATA = {
   },
 
   /* ================= 选图（收藏卡） =================
-     板卡/冠卡/礼物单/开黑卡/成长录/结单小票 —— 用法与服务清单的多图片系统完全一致：
+     板卡/冠卡/礼物单/开黑卡/成长录/守护星/领养卡/生日卡/VIP卡/结单小票 —— 用法与服务清单的多图片系统完全一致：
      images 数组，每张图 { name, image, condition }
        name      —— 自定义标题（显示在缩略图上方，也用于搜索）
        image     —— 图片路径（assets/gallery/xxx.jpg）或外链
@@ -179,6 +179,7 @@ window.APP_DATA = {
     guardian: { images: [] },
     adopt:    { images: [] },
     birthday: { images: [] },
+    vip:      { images: [] },
     receipt:  { images: [] }
   },
 
