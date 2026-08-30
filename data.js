@@ -37,7 +37,7 @@ window.APP_DATA = {
   companions: [
     { id: 'yuji', name: '雨季', lanes: ['打野', '中单'], price: 30, tags: ['顶技', '镜'], intro: '无忧无虑 · 主玩英雄：镜', image: 'assets/cards/yuji.jpeg', video: 'assets/voices/yuji.mp4' },
     { id: 'xiaobei', name: '小北', lanes: ['中单', '打野'], price: 35, tags: ['火舞', '猫咪', '弈星'], intro: '一个宝宝 · 主玩英雄：火舞', image: 'assets/cards/小北.jpg', video: 'assets/voices/小北.mp4' },
-    { id: 'yeyu', name: '夜羽', lanes: ['中单', '辅助'], price: 35, tags: ['杨玉环', '嫦娥', '海月', '西施', '大乔'], intro: '温柔话多抽象有梗 · 主玩英雄：杨玉环', image: 'assets/cards/夜羽.jpg', video: '' },
+    { id: 'yeyu', name: '夜羽', lanes: ['中单', '辅助'], price: 35, tags: ['杨玉环', '嫦娥', '海月', '西施', '大乔'], intro: '温柔话多抽象有梗 · 主玩英雄：杨玉环', image: 'assets/cards/夜羽.jpg', video: 'assets/voices/夜羽.mp4' },
     { id: 'angel', name: 'Angel', lanes: ['中单'], price: 15, tags: ['少司缘瑶西施小乔'], intro: '我保证你是天使是这世界太坏', image: 'assets/cards/Angel.jpg', video: 'assets/voices/Angel.mp4' },
     { id: 'dk', name: 'DK', lanes: ['射手'], price: 30, tags: ['元射龙人阿离'], intro: '希望我们天天开心', image: 'assets/cards/DK.jpg', video: 'assets/voices/DK.mp4' },
     { id: 'emo', name: 'emo', lanes: ['打野'], price: 25, tags: ['橘右京影'], intro: '天天开心', image: 'assets/cards/emo.jpg', video: 'assets/voices/emo.mp4' },
@@ -85,7 +85,15 @@ window.APP_DATA = {
     { id: 'yu', name: '语', lanes: ['打野'], price: 35, tags: ['老虎阿古朵马超靠'], intro: '2.1W老虎阿古朵嫁娥猫咪', image: 'assets/cards/语.jpg', video: 'assets/voices/语.mp4' },
     { id: 'ruantang', name: '软糖', lanes: ['中单'], price: 15, tags: ['公孙离狄仁杰小乔瑶'], intro: '阴雨绵绵你是我的晴天', image: 'assets/cards/软糖.jpg', video: 'assets/voices/软糖.mp4' },
     { id: 'shuangjin', name: '霜烬', lanes: ['中单'], price: 20, tags: ['沈梦溪娥奕星'], intro: '同途即心安', image: 'assets/cards/霜烬.jpg', video: 'assets/voices/霜烬.mp4' },
-    { id: 'gege', name: '鸽鸽', lanes: ['中单'], price: 15, tags: ['阿离香香'], intro: '话多抽象只想做你的开心果', image: 'assets/cards/鸽鸽.jpg', video: 'assets/voices/鸽鸽.mp4' }
+    { id: 'gege', name: '鸽鸽', lanes: ['中单'], price: 15, tags: ['阿离香香'], intro: '话多抽象只想做你的开心果', image: 'assets/cards/鸽鸽.jpg', video: 'assets/voices/鸽鸽.mp4' },
+    { id: 'guitu', name: '归途', lanes: ['边路'], price: 35, tags: ['蒙恬','影','狂铁','蚩姹'], intro: '极致战坦 话多温柔有耐心', image: 'assets/cards/归途.jpg', video: 'assets/voices/归途.mp4' },
+    { id: 'wuyou', name: '伍优', lanes: ['射手','边路'], price: 30, tags: ['李信','马超','元歌','影','元射'], intro: '可以为姐姐做任何事', image: 'assets/cards/伍优.jpg', video: 'assets/voices/伍优.mp4' },
+    { id: 'xiaoru', name: '小如', lanes: ['中单','辅助'], price: 15, tags: ['西施','瑶','朵莉亚'], intro: '容易掉眼泪也是你的可爱之处', image: 'assets/cards/小如.jpg', video: 'assets/voices/小如.mp4' },
+    { id: 'hexinyu', name: '何心渝', lanes: ['打野','中单'], price: 30, tags: ['老虎'], intro: '海盟山誓 只是一瞬间', image: 'assets/cards/何心渝.jpg', video: 'assets/voices/何心渝.mp4' },
+    { id: 'riji', name: '日记', lanes: ['打野','边路'], price: 15, tags: ['橘右京','老虎','猪八戒'], intro: '希望你能够一直开心', image: 'assets/cards/日记.jpg', video: 'assets/voices/日记.mp4' },
+    { id: 'youzhu', name: '幽竹', lanes: ['中单','辅助'], price: 30, tags: ['小乔','王昭君','甄姬','海月'], intro: '有礼貌,爱说话', image: 'assets/cards/幽竹.jpg', video: 'assets/voices/幽竹.mp4' },
+    { id: 'posui', name: '破碎', lanes: ['打野'], price: 35, tags: ['镜','老虎'], intro: '温柔心态好 情绪稳定', image: 'assets/cards/破碎.jpg', video: 'assets/voices/破碎.mp4' },
+    { id: 'xiaonian2', name: '小念', lanes: ['边路'], price: 35, tags: ['夏洛特','曹操','影'], intro: '小念念念神', image: 'assets/cards/xiaonian2.jpg', video: 'assets/voices/xiaonian2.mp4' }
   ],
 
   /* ================= 服务清单 =================
@@ -159,7 +167,11 @@ window.APP_DATA = {
      新增一张图：图片放进 assets/gallery/，再在对应分类的 images 数组里加一行即可
      （这里的"礼物单"跟服务清单里的"礼物单"是两个独立的东西，互不影响） */
   gallery: {
-    board:    { images: [] },
+    board:    { images: [
+      { name: '萌萌档案', image: 'assets/gallery/3708.jpg', condition: '' },
+      { name: '嘟嘟の水手观察志', image: 'assets/gallery/3709.jpg', condition: '' },
+      { name: 'Angel lamb 专属板卡', image: 'assets/gallery/3729.jpg', condition: '' }
+    ] },
     champion: { images: [] },
     gift:     { images: [] },
     squad:    { images: [] },
