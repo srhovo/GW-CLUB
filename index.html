@@ -410,7 +410,7 @@
 /* ============================================================
    数据入口
    ============================================================ */
-const DATA = window.APP_DATA || { lanes:[], prices:[], companions:[], services:{price:{images:[],items:[]},prepaid:{images:[],items:[]},gift:{images:[],items:[]},activity:{images:[]},settlement:{images:[]}}, gallery:{board:{images:[]},champion:{images:[]},gift:{images:[]},squad:{images:[]},growth:{images:[]},receipt:{images:[]}}, management:[], notes:{title:'',items:[]} };
+const DATA = window.APP_DATA || { lanes:[], prices:[], companions:[], services:{price:{images:[],items:[]},prepaid:{images:[],items:[]},gift:{images:[],items:[]},activity:{images:[]},settlement:{images:[]}}, gallery:{board:{images:[]},champion:{images:[]},gift:{images:[]},squad:{images:[]},growth:{images:[]},guardian:{images:[]},adopt:{images:[]},birthday:{images:[]},vip:{images:[]},receipt:{images:[]}}, management:[], notes:{title:'',items:[]} };
 const LANES  = DATA.lanes && DATA.lanes.length ? ['全部'].concat(DATA.lanes) : ['全部','打野','中路','射手','辅助','上单','全能'];
 const PRICES = ['全部'].concat((DATA.prices && DATA.prices.length ? DATA.prices : [15,18,20,22,25,28,30,35,40]).map(String));
 const COMPANIONS = DATA.companions || [];
@@ -619,7 +619,7 @@ function subContent(key){
 }
 
 /* ============================================================
-   渲染：选图（板卡/冠卡/礼物单/开黑卡/成长录/结单小票）
+   渲染：选图（板卡/冠卡/礼物单/开黑卡/成长录/守护星/领养卡/生日卡/VIP卡/结单小票）
    与服务清单共用同一套卡片墙样式；区别是点开大图后下方会显示「获取条件」
    ============================================================ */
 const GALLERY_TABS = [
@@ -631,6 +631,7 @@ const GALLERY_TABS = [
   {key:'guardian', label:'守护星'},
   {key:'adopt', label:'领养卡'},
   {key:'birthday', label:'生日卡'},
+  {key:'vip', label:'VIP卡'},
   {key:'receipt', label:'结单小票'}
 ];
 const GALLERY_LABELS = {};

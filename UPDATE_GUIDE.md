@@ -124,7 +124,7 @@
 
 ---
 
-## 🖼️ 场景三：更新选图（板卡/冠卡/礼物单/开黑卡/成长录/结单小票）
+## 🖼️ 场景三：更新选图（板卡/冠卡/礼物单/开黑卡/成长录/守护星/领养卡/生日卡/VIP卡/结单小票）
 
 ### 步骤 1：上传图片
 把图片传到 `assets/gallery/` 文件夹。
@@ -149,6 +149,7 @@
 | 守护星 | `gallery.guardian.images` |
 | 领养卡 | `gallery.adopt.images` |
 | 生日卡 | `gallery.birthday.images` |
+| VIP卡 | `gallery.vip.images` |
 | 结单小票 | `gallery.receipt.images` |
 
 ---
