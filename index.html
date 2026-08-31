@@ -3,8 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="养成系club · 挑选心仪陪玩，查看价格表、预存表、活动与礼物清单，支持拼音搜索">
+<meta name="theme-color" content="#F6F4F0">
 <title>养成系club · 请宝宝挑选心仪陪玩</title>
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=ZCOOL+KuaiLe&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23C24A6B' d='M12 21s-7-4.6-9.3-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.3 12C19 16.4 12 21 12 21z'/%3E%3C/svg%3E">
+<!-- 字体：预连接 + 非阻塞加载（display=swap），首屏文字先用系统字体渲染、字体到位后无缝替换，不阻塞首次绘制 -->
+<link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+<link rel="preload" as="style" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=ZCOOL+KuaiLe&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=ZCOOL+KuaiLe&display=swap"></noscript>
+<!-- 首屏标题图提前加载（LCP），不用等 JS 探测完成才开始下载 -->
+<link rel="preload" as="image" href="assets/club-logo.jpg" fetchpriority="high">
 <style>
   :root{
     --bg:#F6F4F0;
@@ -342,7 +350,7 @@
     </header>
     <div class="search-box">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="searchInput" type="text" placeholder="搜名字 / 分路 / 价位 / 首字母" autocomplete="off">
+      <input id="searchInput" type="text" placeholder="搜名字 / 分路 / 价位 / 首字母" autocomplete="off" enterkeyhint="search">
     </div>
     <div class="hot-row" id="hotRow"></div>
     <div id="searchResult"></div>
@@ -489,7 +497,8 @@ const ASSET_BASES = {
 };
 const MG_PINYIN = {'团长':'tuanzhang','副团':'futuan','管理':'guanli'};
 (MANAGEMENT||[]).forEach(m => {
-  if(m && m.role){
+  /* data.js 里已显式填了 avatar 的不再自动探测：省去启动时一批无谓的 HEAD 请求 */
+  if(m && m.role && !m.avatar){
     const bases = ['assets/management/'+m.role];
     if(MG_PINYIN[m.role]) bases.push('assets/management/'+MG_PINYIN[m.role]);
     ASSET_BASES['mg:'+m.role] = bases;
@@ -558,7 +567,7 @@ function renderBrowse(){
 
 function cardHTML(c){
   const media = c.image
-    ? `<img src="${c.image}" alt="${c.name}" loading="lazy">`
+    ? `<img src="${c.image}" alt="${c.name}" loading="lazy" decoding="async">`
     : `<div class="ph"><div class="ch">${(c.name||'?').charAt(0)}</div><span>自介卡待上传</span></div>`;
   return `
   <article class="card" onclick="openMedia('${c.id}')" aria-label="${c.name}的陪玩卡片">
@@ -615,7 +624,7 @@ function subContent(key){
     <div class="svc-card" onclick="openServiceImage('${key}',${i})">
       <div class="svc-card-name">${it.name || label}</div>
       <div class="svc-thumb">
-        <img src="${it.image||''}" alt="${it.name||label}" loading="lazy">
+        <img src="${it.image||''}" alt="${it.name||label}" loading="lazy" decoding="async">
         <span class="svc-zoom">${ZOOM_ICON}</span>
       </div>
     </div>`).join('');
@@ -685,7 +694,7 @@ function galContent(key){
     <div class="svc-card" onclick="openGalleryImage('${key}',${i})">
       <div class="svc-card-name">${it.name || label}</div>
       <div class="svc-thumb">
-        <img src="${it.image||''}" alt="${it.name||label}" loading="lazy">
+        <img src="${it.image||''}" alt="${it.name||label}" loading="lazy" decoding="async">
         <span class="svc-zoom">${ZOOM_ICON}</span>
       </div>
     </div>`).join('');
@@ -793,6 +802,19 @@ function computeHotList(){
 function companionText(c){
   return [c.id||'', c.name, laneLabel(c), (c.price||'')+'r', c.intro||'', (c.tags||[]).join(' ')].join(' ');
 }
+/* 搜索索引：文本+拼音在启动时算好一次，输入时直接比对，不用每个按键全量重算（拼音转换较重） */
+const S_COMP = COMPANIONS.map(c => { const t = companionText(c); return {c, t, py:pyOf(t)}; });
+const S_PRICE = ((SERVICES.price||{}).items||[]).map(p => { const t = p.name+' '+(p.meta||'')+' '+p.price; return {p, t, py:pyOf(p.name+(p.meta||'')+p.price)}; });
+const S_GIFT   = ((SERVICES.gift||{}).items||[]).map(g => { const t = g.name+' '+g.price; return {g, t, py:pyOf(g.name+g.price)}; });
+const S_PREPAID = ((SERVICES.prepaid||{}).items||[]).map(p => { const t = p.name+' '+(p.amount||'')+' '+(p.note||''); return {p, t, py:pyOf(p.name+(p.amount||'')+(p.note||''))}; });
+const S_SVC = [];
+SVC_KEYS.forEach(k => svcImages(k).forEach((im,i) => {
+  if(im.name) S_SVC.push({key:k, idx:i, name:im.name, image:im.image||'', label:SERVICE_LABELS[k]||k, py:pyOf(im.name)});
+}));
+const S_GAL = [];
+GAL_KEYS.forEach(k => galImages(k).forEach((im,i) => {
+  if(im.name) S_GAL.push({key:k, idx:i, name:im.name, image:im.image||'', label:GALLERY_LABELS[k]||k, py:pyOf(im.name)});
+}));
 function renderSearch(){
   $('#hotRow').innerHTML = `<span class="cap">热门</span>` + computeHotList().map(h =>
     `<button class="chip" onclick="doSearch('${h}')">${h}</button>`).join('');
@@ -807,24 +829,12 @@ function renderSearch(){
       </div>`;
     return;
   }
-  const cs = COMPANIONS.filter(c => matchItem(companionText(c), pyOf(companionText(c)), q));
-  const ps = ((SERVICES.price||{}).items||[]).filter(p => matchItem(p.name+' '+(p.meta||'')+' '+p.price, pyOf(p.name+(p.meta||'')+p.price), q));
-  const gs = ((SERVICES.gift||{}).items||[]).filter(g => matchItem(g.name+' '+g.price, pyOf(g.name+g.price), q));
-  const pp = ((SERVICES.prepaid||{}).items||[]).filter(p => matchItem(p.name+' '+(p.amount||'')+' '+(p.note||''), pyOf(p.name+(p.amount||'')+(p.note||'')), q));
-  const svcMatches = [];
-  SVC_KEYS.forEach(k => {
-    svcImages(k).forEach((im,i) => {
-      const nm = im.name || '';
-      if(nm && matchItem(nm, pyOf(nm), q)) svcMatches.push({key:k, idx:i, name:nm, image:im.image||'', label:SERVICE_LABELS[k]||k});
-    });
-  });
-  const galMatches = [];
-  GAL_KEYS.forEach(k => {
-    galImages(k).forEach((im,i) => {
-      const nm = im.name || '';
-      if(nm && matchItem(nm, pyOf(nm), q)) galMatches.push({key:k, idx:i, name:nm, image:im.image||'', label:GALLERY_LABELS[k]||k});
-    });
-  });
+  const cs = S_COMP.filter(s => matchItem(s.t, s.py, q)).map(s => s.c);
+  const ps = S_PRICE.filter(s => matchItem(s.t, s.py, q)).map(s => s.p);
+  const gs = S_GIFT.filter(s => matchItem(s.t, s.py, q)).map(s => s.g);
+  const pp = S_PREPAID.filter(s => matchItem(s.t, s.py, q)).map(s => s.p);
+  const svcMatches = S_SVC.filter(s => matchItem(s.name, s.py, q));
+  const galMatches = S_GAL.filter(s => matchItem(s.name, s.py, q));
   const total = cs.length + ps.length + gs.length + pp.length + svcMatches.length + galMatches.length;
   if(!total){
     box.innerHTML = `
@@ -839,7 +849,7 @@ function renderSearch(){
   if(cs.length){
     html += `<div class="group-title"><span class="tick"></span>陪玩 · ${cs.length}</div>`;
     html += cs.map(c => {
-      const thumb = c.image ? `<img src="${c.image}" alt="${c.name}">` : `<div class="ph">${(c.name||'?').charAt(0)}</div>`;
+      const thumb = c.image ? `<img src="${c.image}" alt="${c.name}" loading="lazy" decoding="async">` : `<div class="ph">${(c.name||'?').charAt(0)}</div>`;
       return `
       <div class="srow" onclick="openMedia('${c.id}')">
         ${thumb}
@@ -1056,15 +1066,24 @@ function closeNotes(){ $('#noteModal').classList.remove('open'); }
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 
+/* ESC 关闭弹层（桌面/带键盘设备的习惯操作） */
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return;
+  if(modal.classList.contains('open')) closeMedia();
+  else if($('#noteModal').classList.contains('open')) closeNotes();
+});
+
 /* ============================================================
    初始化
    ============================================================ */
 $('#searchInput').addEventListener('input', e => {
   state.q = e.target.value;
   const trimmed = state.q.trim();
-  if(trimmed) recordHotUse(trimmed);
+  /* 输入停顿 600ms 后再记录热词：避免每个按键都同步写 localStorage（会卡输入），统计也更准 */
+  if(trimmed){ clearTimeout(hotRecordTimer); hotRecordTimer = setTimeout(()=>recordHotUse(trimmed), 600); }
   renderSearch();
 });
+let hotRecordTimer;
 renderClub();
 renderBrowse();
 renderService();

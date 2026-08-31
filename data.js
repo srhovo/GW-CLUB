@@ -17,13 +17,14 @@
 window.APP_DATA = {
 
   /* 更新日期（页面会展示） */
-  updateDate: '2026-08-30',
+  updateDate: '2026-08-31',
 
   /* 俱乐部标题图（图片形式展示）
      直接把图片命名为 assets/club-logo.png 上传即可自动生效（也支持 club-title.png / club.png，
-     .jpg/.jpeg/.webp 均可）；或在此手动填路径。未上传时页面以「养成系club」文字兜底展示 */
+     .jpg/.jpeg/.webp 均可）；或在此手动填路径。未上传时页面以「养成系club」文字兜底展示
+     （当前已直接填好现有图片路径，首屏可立即显示、无需等待自动探测） */
   club: {
-    logo: ''
+    logo: 'assets/club-logo.jpg'
   },
 
   /* 分路分类（可按需增删） */

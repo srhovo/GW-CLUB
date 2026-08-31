@@ -103,8 +103,6 @@ ffmpeg -i input.mp4 -vcodec libx264 -crf 28 -preset medium -acodec aac -b:a 128k
 ├── AGENT_GUIDE.md          # 本文件，AI操作规范
 └── assets/
     ├── club-logo.jpg       # 俱乐部标题图（固定名称）
-    ├── css/
-    │   └── style.css       # 样式文件（一般不修改）
     ├── cards/              # 陪玩自介卡（英文id命名）
     │   ├── xiaobei.jpg
     │   ├── yeyu.jpg
